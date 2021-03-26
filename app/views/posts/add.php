@@ -1,3 +1,4 @@
+<! -- Não faz parte do projecto -->
 <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/posts.css">
 <?php require APPROOT . "../views/inc/header.php";?>
 <div class="new-Post">
