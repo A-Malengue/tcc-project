@@ -24,6 +24,7 @@
 
         public function add(){
             if($_SERVER["REQUEST_METHOD"] == "POST"){
+                
                 //Sanitize Post array
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -44,11 +45,16 @@
                     $data["body_err"] = "Please enter title";
                 }
 
-                if(!empty($data["title_err"]) && !empty($data["body_err"])){
-
+                if(empty($data["title_err"]) && empty($data["body_err"])){
+                    // Validated
+                    if($this->postModel->addPost($data)){
+                        redirect("posts");
+                    }else{
+                        die("Algo de errado");
+                    }
                 }else{
                     //load view with erros
-                    $this->view("posts/add", $data);
+                    $this->view("posts/index", $data);
                 }
 
             } else{
@@ -57,7 +63,7 @@
                     "body" => "",
                  ];
      
-                 $this->view("posts/add", $data);
+                 $this->view("posts/index", $data);
             }
             
         }
