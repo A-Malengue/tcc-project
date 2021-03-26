@@ -53,7 +53,7 @@
 
                 }else{
                     //load view with erros
-                    $this->view("posts/add", $data);
+                    $this->view("posts/index", $data);
                 }
 
             } else{
@@ -62,7 +62,7 @@
                     "body" => "",
                  ];
      
-                 $this->view("posts/add", $data);
+                 $this->view("posts/index", $data);
             }
             
         }
