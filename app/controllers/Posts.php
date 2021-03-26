@@ -46,12 +46,19 @@
                 }
 
                 if(empty($data["title_err"]) && empty($data["body_err"])){
+<<<<<<< HEAD
                     // Validated
+=======
+>>>>>>> b64e1cbeafee073f4c4a85c1b746eb0716cfa96a
                     if($this->postModel->addPost($data)){
                         redirect("posts");
                     }else{
                         die("Algo de errado");
                     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b64e1cbeafee073f4c4a85c1b746eb0716cfa96a
                 }else{
                     //load view with erros
                     $this->view("posts/index", $data);

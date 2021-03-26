@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 <div class="main">
+=======
+<! -- Não faz parte do projecto -->
+<link rel="stylesheet" href="<?php echo URLROOT; ?>/css/posts.css">
+<?php require APPROOT . "../views/inc/header.php";?>
+>>>>>>> b64e1cbeafee073f4c4a85c1b746eb0716cfa96a
 <div class="new-Post">
         <div class="info-User">
             <div class="img-User"></div>
@@ -19,4 +25,8 @@
           </div>
         </form>
     </div>
+<<<<<<< HEAD
     </div>
+=======
+<?php require APPROOT . "../views/inc/footer.php";?>
+>>>>>>> b64e1cbeafee073f4c4a85c1b746eb0716cfa96a

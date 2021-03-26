@@ -36,4 +36,8 @@ class Post{
         return false;
     }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b64e1cbeafee073f4c4a85c1b746eb0716cfa96a
