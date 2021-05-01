@@ -190,3 +190,13 @@ header{
 .delete:hover{
     background: #3f484e;
 }
+.detalhe{
+    background: #54616b;
+}
+.detalhe a{
+    text-decoration: none;
+    color: white;
+}
+.detalhe:hover{
+    background: #3f484e;
+}
