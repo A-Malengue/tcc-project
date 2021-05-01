@@ -12,18 +12,15 @@
 		<div class="form-control ">
 			<label for="username">Email</label>
 			<input type="email"  placeholder="Email" name="email" id="email" value="<?php echo $data["email"]; ?>">
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
 			<small class="error"><?php echo $data["email_err"]; ?></small>
 		</div>
 
 		<div class="form-control ">
 			<label for="username">Senha</label>
 			<input type="password" placeholder="Senha" name="senha" id="password" value="<?php echo $data["senha"]; ?>">
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
 			<small class="error"><?php echo $data["senha_err"]; ?></small>
 		</div>
+		<a class="password" href="<?php echo URLROOT; ?>/users/cadastro">Já tem uma conta?Crie uma</a>
 		<button>Submit</button>
 	</form>
 	</div>

@@ -4,7 +4,7 @@
         $this->userModel = $this->model("User");
     }
 
-    public function register(){
+    public function cadastro(){
         //Check for posts
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             // PROCESS form
@@ -23,30 +23,25 @@
                 "senha_err" => "",
                 "confirme_senha_err" => "",
                 ];
-
                 //Validate Email
                 if(empty($data["email"])){
-                    $data["email_err"] = "Coloque o Email";
+                    $data["email_err"] = "Coloque um Email";
                 }else{
                     //Check Email
                     if($this->userModel->findUserByEmail($data["email"])){
                         $data["email_err"] = "Email já está sendo usado";
                     }
-
                 }
-
                 //Validate nome
                 if(empty($data["nome"])){
                     $data["nome_err"] = "Coloque o Nome";
                 }
-
                 //Validate Senha
                 if(empty($data["senha"])){
                     $data["senha_err"] = "Coloque a senha";
                 }   elseif(strlen($data["senha"]) < 6){
                     $data["senha_err"] = "Senha deve ter no minimo 6 letras";
                    }
-
                    //Validate Confirme Senha
                    if(empty($data["confirme_senha"])){
                     $data["confirme_senha_err"] = "confirme senha";
@@ -58,9 +53,7 @@
                 
                 //Make sure errors are empty
                 if(empty($data["email_err"]) && empty($data["nome_err"]) && empty($data["senha_err"]) && empty($data["confirme_senha_err"])){
-                    //Validate
-                    
-
+                    //Validate     
                     //Hash password
                     $data["senha"] = password_hash($data["senha"], PASSWORD_DEFAULT);
                 
@@ -69,12 +62,12 @@
                         flash('register_success', 'Registro feito agora podes fazer o login');
                         redirect("users/login");
                     }else{
-                        die("Algo de errado não esta certo");
+                        die("Algo está errado");
                     }
                 
                 } else{
                     //load view
-            $this->view("users/register", $data);
+            $this->view("users/cadastro", $data);
                 }
 
         } else {
@@ -91,7 +84,7 @@
             ];
 
             //load view 
-            $this->view("users/register", $data);
+            $this->view("users/cadastro", $data);
         }
     }
 
@@ -134,7 +127,6 @@
                 $loggedInUser = $this->userModel->login($data["email"], $data["senha"]);
                 if($loggedInUser){
                     //Create Session
-                    //die("Supimpa");
                     $this->createdUserSession($loggedInUser);
                 }else{
                     $data["senha_err"] = "Senha Incorreta ";
@@ -176,6 +168,9 @@
         session_destroy();
         redirect("users/login");
     }
+    public function perfil(){
+        $this->view("users/perfil");
+      }
 
     
 }

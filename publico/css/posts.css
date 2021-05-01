@@ -38,7 +38,6 @@ header{
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background: #333;
 }
 
 .new-Post .info-User Strong{
@@ -46,12 +45,24 @@ header{
     margin-left: 10px;
     color: #23A0FF;
 }
+
 .new-Post .form-Post{
     display: flex;
     flex-direction: column;
     width: 100%;
 }
-
+/*-----Secção de comentarios-----*/
+.posts .post .comentario{
+    margin-top: 5px;
+}
+.form-Post .img-User{
+    margin-top: 8px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: block;
+    float: left;
+}
 .new-Post .form-Post textarea{
     height: 90px;
     background: #FBFBFB;
@@ -61,10 +72,54 @@ header{
     resize: none;
     outline: none;
     border: 0;
-
     font-weight: bold;
     font-family: Roboto, sans-serif;
     color: #727272;
+    display: block;
+    float: left;
+    
+}
+.form-Post input{
+   display: block;
+   margin-top: 15px;
+   border: none;
+   width: 70px;
+   height: 20px;
+   float: right;
+   cursor: pointer;
+   color: #f8f9fa;
+   background: #23A0FF;
+}
+
+.form-Post input:hover{
+    background: #047edb;
+}
+/*-----Secção da área comentarios-----*/
+.area-comentario {
+    margin-top: 5px;
+    border-bottom: 1px solid grey;
+    clear: both;
+    color: #727272;
+}
+.area-comentario p{
+    height: bold;
+    color: #727272;
+    line-height: 18px;
+}
+.posts .post textarea{
+    height: 50px;
+    background: #FBFBFB;
+    margin: 9px;
+    padding: 7px;
+    width: 85%;
+    border-radius: 10px;
+    resize: none;
+    outline: none;
+    border: 0;
+    font-weight: bold;
+    font-family: Roboto, sans-serif;
+    color: #727272;
+    
 }
 .error{
 	color: #e74c3c;
@@ -79,7 +134,7 @@ header{
     width: 100px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .icons-and-btn .icons button{
@@ -123,12 +178,19 @@ header{
     display: flex;
     align-items: center;
 }
+p#welcome {
+    display: grid;
+    background: #f8f9fa!important;
+    margin-bottom: 2px;
+    padding: 1px;
+    color: #000;
+  }
 
 .info-User-post .img-User-post{
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: #333;
+    
 }
 .nome-hora >Strong{
     color: cornflowerblue;
@@ -163,29 +225,46 @@ header{
     cursor: pointer;
     transition: background 0.2s;
 }
+
 .action-btn-post .filespost img{
    margin-right: 5px;
 }
+.action-btn-post .filespost i{
+    margin-right: 5px;
+ }
 .like{
     background: #FF6B6B;
 }
 .like:hover{
     background: #e43636;
+    transition: background-color .5s;
 }
 .comment{
     background: #FFC320;
 }
 .comment:hover{
-    background: #dda303;
+    background: #f5d47b;
+    transition: background-color .5s;
 }
 .edit{
     background: #23A0FF;
+    color: white;
+}
+.edit a{
+    text-decoration: none;
+    color: white;
 }
 .edit:hover{
     background: #1085df;
 }
-.delete{
+.delete {
     background: #54616b;
+    text-decoration: none;
+    color: white;
+}
+.delete input{
+    text-decoration: none;
+    color: white;
 }
 .delete:hover{
     background: #3f484e;
@@ -199,4 +278,5 @@ header{
 }
 .detalhe:hover{
     background: #3f484e;
+    transition: background-color .5s;
 }

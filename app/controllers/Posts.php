@@ -2,51 +2,55 @@
     class Posts extends Controller{
        public function __construct(){
            if(!isloggedIn()){
-            redirect("users/login");
+            redirect('users/login');
 
            }
 
-           $this->postModel = $this->model("Post");
-           $this->userModel = $this->model("User");
+           $this->postModel = $this->model('Post');
+           $this->userModel = $this->model('User');
            
        }
-       
-       
+             
         public function index(){
-            //Get Posts
+            //Get Postes e  comentários
+            $posts_comentario = $this->postModel->getComentario();
             $posts = $this->postModel->getPosts();
-
-           
-            
+            $data = [
+                'posts' => $posts,
+                'comentario' => $posts_comentario
+              ];
+        
+              $this->view('posts/index', $data);
+            }
+        
+            public function add(){
+                $posts = $this->postModel->getPosts();
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 //Sanitize Post array
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 
                 $data = [
-                    "posts" => $posts,
-                    //'title' => trim($_POST['title']), 
+                    'posts' => $posts,
                     'body' => trim($_POST['body']),
                     'user_id' => $_SESSION['user_id'],
+                    'user_nome' => $_SESSION['user_nome'],
                     'title_err' => '',
                     'body_err' =>  '',
                  ];
 
-                 //Validate title
-                 /*if(empty($data['title'])){
-                     $data['title_err'] = 'Please enter title';
-                 }*/
+                 
                  //Validate body
                  if(empty($data['body'])){
-                    $data['body_err'] = 'Please enter title';
+                    $data['body_err'] = 'Por favor insira um texto';
                 }
                 //No errors
-                if(/*empty($data['title_err']) &&*/ empty($data['body_err'])){
+                if(empty($data['body_err'])){
                     //Validated
                     if($this->postModel->addPost($data)){
                         flash('post_messagem', 'Reclamação feita');
                         redirect('posts');
                     }else{
-                        die('Algo de errado');
+                        die('Algo está errado');
                     }}
                     else{
                     //load view with erros
@@ -65,15 +69,155 @@
             }
             
         }
-        Public function show ($id = null){
+        public function edite($id){
+               
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                //Sanitize Post array
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                
+                $data = [
+                    'id' =>  $id,
+                    'body' => trim($_POST['body']),
+                    'user_id' => $_SESSION['user_id'],
+                    'user_nome' => $_SESSION['user_nome'],
+                    'title_err' => '',
+                    'body_err' =>  '',
+                 ];
+
+                 
+                 //Validate body
+                 if(empty($data['body'])){
+                    $data['body_err'] = 'Por favor insira um texto';
+                }
+                //No errors
+                if(empty($data['body_err'])){
+                    //Validated
+                    if($this->postModel->updatePost($data)){
+                        flash('post_messagem', 'Reclamação editada');
+                        redirect('posts');
+                    }else{
+                        die('Algo está errado');
+                    }}
+                    else{
+                    //load view with erros
+                    $this->view('/posts/edite', $data);
+                }
+                
+
+
+            } else{
+                //Get existing post from model
+                $post = $this->postModel->getPostById($id);
+                //Check for owner
+                if($post->user_id != $_SESSION['user_id']){
+                    redirect('posts');
+                }
+                $data = [
+                    'id' => $id, 
+                    'body' => $post->body
+                 ];
+     
+                 $this->view('/posts/edite', $data);
+            }
+            
+        }
+        Public function opcoes($id){
             $post = $this->postModel->getPostById($id);
-            $user = $this->userModel->getPostById($post->user_id);
+            $user = $this->userModel->getUserById($post->user_id);
 
             $data = [
                 'post' => $post,
                 'user' => $user
             ];
 
-            $this->view('posts/show', $data);
+            $this->view('posts/opcoes', $data);
         }
+        // Delete Post
+    public function apagar($id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+          //Execute
+          if($this->postModel->deletePost($id)){
+            // Redirect to login
+            flash('post_message', 'Reclamação eliminada');
+            redirect('posts');
+            } else {
+              die('Algo está errado');
+            }
+        } else {
+          redirect('posts');
+        }
+      }
+      public function curtir($data){
+        $post = $this->postModel->getPosts();
+        $user = $this->userModel->getUserById($post->user_id);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+          //Execute
+          $data = [
+                   
+            'user' => $user,
+            'post' => $post,    
+         ];
+         if($this->postModel->curtirPost($data)){
+            // Redirect to login
+            flash('post_message', 'Reclamação eliminada');
+            redirect('posts');
+            } else {
+              die('Algo está errado');
+            }
+         
+          
+            $this->view('/posts', $data);
+        }
+        
+      }
+      
+
+        
+      public function addcomment($data){
+        $post = $this->postModel->getPosts();
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        //Sanitize Post array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        
+        $data = [
+            'comentario' => trim($_POST['comentario']),
+            'user_nome' => $_SESSION['user_nome'],
+            'posts_id' => $post->postId,
+            'comentario_err' =>  '',
+         ];
+
+         
+         //Validate body
+         if(empty($data['comentario'])){
+            $data['comentario_err'] = 'Por favor insira um texto';
+        }
+        //No errors
+        if(empty($data['comentario_err'])){
+            //Validated
+            if($this->postModel->addComment($data)){
+                flash('post_messagem', 'Comentario feito');
+                redirect('posts');
+            }else{
+                die('Algo está errado');
+            }}
+            else{
+            //load view with erros
+            $this->view('/posts/index', $data);
+        }
+        
+
+
+    } else{
+        $data = [ 
+            'comentario' => '',
+         ];
+
+         $this->view('/posts/index', $data);
     }
+    
+}
+
+
+    
+}
+    

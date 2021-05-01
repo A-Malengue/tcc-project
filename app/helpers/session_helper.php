@@ -31,4 +31,10 @@
     }else{
         return false;
     }
-}
+    function isloggedOn(){
+      if(isset($_SESSION["user_admin"])){
+          return true;
+      }else{
+          return false;
+      }
+}}
