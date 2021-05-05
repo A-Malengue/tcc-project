@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
+
+.container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	width: 100%;
+	
+}
+.content{
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	width: 400px;
+	max-width: 100%;
+}
+.header {
+	border-bottom: 1px solid #f0f0f0;
+	background-color: #f7f7f7;
+	padding: 20px 40px;
+	width: 100%;
+}
+.header h2 p {
+	margin: 0;
+}
+.form {
+	padding: 30px 40px;	
+	width: 100%;
+}
+.form-control {
+	margin-bottom: 10px;
+	padding-bottom: 20px;
+	position: relative;
+	width: 100%;
+}
+.form-control label {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+.form-control input {
+	border: 2px solid #f0f0f0;
+	border-radius: 4px;
+	display: block;
+	font-family: inherit;
+	font-size: 14px;
+	padding: 10px;
+	width: 100%;
+}
+.form-control input:focus {
+	outline: 0;
+	border-color: #777;
+}
+.error{
+	color: #e74c3c;
+}
+.success{
+	border: 2px solid;
+	border-radius: 4px;
+	border-color: #2ecc71;
+	color: #2ecc71;
+	visibility: visible;
+}
+.form-control .error small {
+	visibility: visible;
+}
+
+.form button {
+	background-color: #8e44ad;
+	border: 2px solid #8e44ad;
+	border-radius: 4px;
+	color: #fff;
+	display: block;
+	font-family: inherit;
+	font-size: 16px;
+	padding: 10px;
+	margin-top: 20px;
+	width: 100%;
+	cursor: pointer;
+}
+.password{
+	display: center;
+    text-align: center;
+    color: grey;
+    font-size: 14px;
+    margin: 15px 0;
+	text-decoration: none;
+}
+@media (max-width: 640px) {
+    .content{
+		max-width: 100%;
+	}
+    }
+
+
+
+
+
+
+
+
